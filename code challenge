@@ -1,0 +1,42 @@
+
+#1st approach by using pandas to read and write files because if file is large in size then using pandas increases the speed
+import pandas as pd
+filepath=input('Enter the path')
+df=pd.read_csv(filepath + 'data.txt')
+list1=[]
+count=0
+for i in df:
+    i.lower()
+    elements=i.split()
+    for ele in elements:
+        list1.append(elements.count(ele))
+df_output=list(zip(elements,list1))
+df_output.sort(key=lambda list1:list1[1])
+df_output1=pd.DataFrame(df_output)
+df_output1.to_csv(filepath+'result1.txt',sep=' ',index=False,header=False)
+
+
+
+#2nd approach using file operations
+filepath=input('Enter the path')
+df=open(filepath + 'data.txt','r')
+list1=[]
+count=0
+for i in df:
+    i.lower()
+    elements=i.split()
+    for ele in elements:
+        list1.append(elements.count(ele))
+df_output=list(zip(elements,list1))
+df_output.sort(key=lambda list1:list1[1])
+#df_output1=pd.DataFrame(df_output)
+#df_output1.to_csv(filepath+'result.txt',sep=' ',index=False,header=False)
+file=open(filepath+'result.txt','w')
+file.write(str(df_output))
+df.close()
+file.close()
+
+
+#to commit in production i will
+#run few testcases, validate the output, check for errors, solving defect
+#also will check for packages/modules version that it should support the code
